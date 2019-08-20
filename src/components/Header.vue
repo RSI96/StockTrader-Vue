@@ -28,6 +28,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
+
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">End day</button>
             </form>
         </div>

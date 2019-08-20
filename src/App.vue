@@ -1,10 +1,8 @@
 <template>
     <div class="container">
         <app-header></app-header>
-        <div class="row">
-            <div class="col-xs-12">
-                <router-view></router-view>
-            </div>
+        <div>
+            <router-view></router-view>
         </div>
     </div>
 </template>
@@ -15,12 +13,15 @@
     export default {
         components: {
             appHeader: Header
+        },
+        created() {
+            this.$store.dispatch('initStocks')
         }
     }
 </script>
 
 <style>
-  body {
-    padding: 30px;
-  }
+    body {
+        padding: 30px;
+    }
 </style>
