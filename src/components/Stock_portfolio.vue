@@ -19,10 +19,10 @@
                     >
                     <div class="input-group-append">
                         <button
-                                class="btn btn-success"
+                                class="btn btn-dark"
                                 @click="sellStock"
-                                :disabled="quantity <= 0"
-                        >SELL
+                                :disabled="checkQuantity || quantity <= 0 || Number.isInteger(quantity)"
+                        >{{ checkQuantity ? 'not enough' : 'SELL' }}
                         </button>
                     </div>
                 </div>
@@ -44,11 +44,8 @@
             }
         },
         computed: {
-            funds() {
-                return this.$store.getters.funds;
-            },
-            checkFunds() {
-                return this.quantity * this.stock.price > this.funds
+            checkQuantity() {
+                return this.quantity > this.stock.quantity;
             }
         },
         methods: {

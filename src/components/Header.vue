@@ -1,7 +1,8 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <router-link to="/" class="navbar-brand">Stock trader</router-link>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -28,21 +29,37 @@
                 </li>
 
             </ul>
-            <strong class="navbar-text navbar-right">Funds: {{ funds }}</strong>
+            <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
 
             <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">End day</button>
+                <button
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="button"
+                        @click="endDay"
+                >End day
+                </button>
             </form>
         </div>
     </nav>
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         name: "Header",
+
         computed: {
             funds() {
                 return this.$store.getters.funds;
+            }
+        },
+        methods: {
+            ...mapActions([
+                'randStocks'
+            ]),
+            endDay() {
+                this.randStocks();
             }
         }
     }

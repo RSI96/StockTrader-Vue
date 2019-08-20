@@ -16,13 +16,12 @@
                             class="form-control"
                             placeholder="Quantity"
                             v-model="quantity"
-                            :class="{danger: checkFunds}" //wewq
                     >
                     <div class="input-group-append">
                         <button
                                 class="btn btn-success"
                                 @click="buyStock"
-                                :disabled="checkFunds || quantity <= 0"
+                                :disabled="checkFunds || quantity <= 0 || Number.isSafeInteger(quantity)"
                         >{{ checkFunds ? 'Get more money' : 'BUY'}}
                         </button>
                     </div>
@@ -65,7 +64,5 @@
 </script>
 
 <style scoped>
-    .danger {
-        border: 1px red;
-    }
+
 </style>
