@@ -26,9 +26,11 @@
                         <a class="dropdown-item" href="#">Load</a>
                     </div>
                 </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
 
+            </ul>
+            <strong class="navbar-text navbar-right">Funds: {{ funds }}</strong>
+
+            <form class="form-inline my-2 my-lg-0">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">End day</button>
             </form>
         </div>
@@ -37,10 +39,17 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        computed: {
+            funds() {
+                return this.$store.getters.funds;
+            }
+        }
     }
 </script>
 
 <style scoped>
-
+    .navbar-right {
+        margin-right: 10px;
+    }
 </style>

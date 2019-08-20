@@ -1,16 +1,69 @@
 <template>
-    <div>
-        <h1>Stock portfolio</h1>
-    </div>
+    <div class="col-sm-6 col-md-4 col-lg-4">
+        <div class="panel">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    {{ stock.name }}
+                    <small>(Price: {{ stock.price }} | Quantity: {{ stock.quantity }})</small>
+                </h4>
+            </div>
+            <div class="panel body">
 
+
+                <div class="input-group mb-3">
+                    <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Quantity"
+                            v-model="quantity"
+                    >
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-success"
+                                @click="sellStock"
+                                :disabled="quantity <= 0"
+                        >SELL
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
+
     export default {
-        name: "Stock_portfolio"
+        name: "Stock_stocks",
+        props: ['stock'],
+        data() {
+            return {
+                quantity: 0
+            }
+        },
+        computed: {
+            funds() {
+                return this.$store.getters.funds;
+            },
+            checkFunds() {
+                return this.quantity * this.stock.price > this.funds
+            }
+        },
+        methods: {
+            ...mapActions({
+                placeDellOrder: 'sellStock'
+            }),
+            sellStock() {
+                const order = {
+                    stockID: this.stock.id,
+                    stockPrice: this.stock.price,
+                    quantity: this.quantity
+                }
+                this.placeDellOrder(order);
+                this.quantity = 0;
+            }
+        }
     }
 </script>
-
-<style scoped>
-
-</style>

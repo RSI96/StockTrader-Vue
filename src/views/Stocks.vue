@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <app-stock v-for="stock in stocks" :key="stock" :stock="stock"></app-stock>
+        <app-stock v-for="stock in stocks" :key="stock.id" :stock="stock"></app-stock>
     </div>
 </template>
 
@@ -14,7 +14,7 @@
         },
         computed: {
             stocks() {
-                return this.$store.getters.stocks
+                return this.$store.getters.stocks;
             }
         }
     }

@@ -1,19 +1,5 @@
 <template>
     <div class="col-sm-6 col-md-4 col-lg-4">
-
-        <!--        <div class="jumbotron">-->
-        <!--            <h1 class="display-4">Hello, world!</h1>-->
-        <!--            <div class="pull-left">-->
-        <!--                <input-->
-        <!--                        type="number"-->
-        <!--                        class="form-control"-->
-        <!--                        placeholder="Quantity">-->
-        <!--            </div>-->
-        <!--            <div class="pull-right">-->
-        <!--                <button class="btn btn-success">BUY</button>-->
-        <!--            </div>-->
-        <!--\        </div>-->
-
         <div class="panel">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -29,9 +15,16 @@
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
-                            v-model="quantity">
+                            v-model="quantity"
+                            :class="{danger: checkFunds}" //wewq
+                    >
                     <div class="input-group-append">
-                        <button class="btn btn-success">BUY</button>
+                        <button
+                                class="btn btn-success"
+                                @click="buyStock"
+                                :disabled="checkFunds || quantity <= 0"
+                        >{{ checkFunds ? 'Get more money' : 'BUY'}}
+                        </button>
                     </div>
                 </div>
 
@@ -48,10 +41,31 @@
             return {
                 quantity: 0
             }
+        },
+        computed: {
+            funds() {
+              return this.$store.getters.funds;
+            },
+            checkFunds() {
+                return this.quantity * this.stock.price > this.funds
+            }
+        },
+        methods: {
+            buyStock() {
+                const order = {
+                    stockID: this.stock.id,
+                    stockPrice: this.stock.price,
+                    quantity: this.quantity
+                };
+                this.$store.dispatch('buyStock', order);
+                this.quantity = 0;
+            }
         }
     }
 </script>
 
-<style>
-
+<style scoped>
+    .danger {
+        border: 1px red;
+    }
 </style>
