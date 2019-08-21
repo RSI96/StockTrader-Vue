@@ -16,6 +16,7 @@
                             class="form-control"
                             placeholder="Quantity"
                             v-model="quantity"
+                            step="1"
                     >
                     <div class="input-group-append">
                         <button
@@ -29,7 +30,7 @@
                         <button
                                 class="btn btn-dark"
                                 @click="sellStock"
-                                :disabled="checkQuantity || quantity <= 0"
+                                :disabled="canSell"
                         >{{ checkQuantity ? 'not enough' : 'SELL' }}
                         </button>
                     </div>
@@ -57,6 +58,12 @@
             },
             checkIfAll() {
                 return this.quantity === this.stock.quantity;
+            },
+            isQuantityFloat() {
+                return Math.floor(this.quantity) !== this.quantity;
+            },
+            canSell() {
+                return this.checkQuantity || this.quantity <= 0 || this.isQuantityFloat
             }
         },
         methods: {

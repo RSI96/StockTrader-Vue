@@ -33,7 +33,7 @@
 
             </ul>
             <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
-
+            <strong class="navbar-text navbar-right">Day: {{ dayCounter }}</strong>
             <form class="form-inline my-2 my-lg-0">
                 <button
                         class="btn btn-outline-success my-2 my-sm-0"
@@ -53,7 +53,8 @@
         name: "Header",
         data() {
             return {
-                isDropdownOpen: false
+                isDropdownOpen: false,
+                dayCounter: 1
             }
         },
         computed: {
@@ -67,6 +68,7 @@
             ]),
             endDay() {
                 this.randStocks();
+                this.dayCounter++;
             }
         }
     }

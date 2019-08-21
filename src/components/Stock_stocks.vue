@@ -17,6 +17,7 @@
                             placeholder="Quantity"
                             :max="maxQuantity"
                             v-model.number="quantity"
+                            pattern="\d+"
                     >
                     <div class="input-group-append">
                         <button
@@ -30,7 +31,7 @@
                         <button
                                 class="btn btn-success"
                                 @click="buyStock"
-                                :disabled="checkFunds || quantity <= 0"
+                                :disabled="canBuy"
                         >{{ checkFunds ? 'Get more money' : 'BUY'}}
                         </button>
                     </div>
@@ -62,6 +63,12 @@
             },
             checkFunds() {
                 return this.quantity * this.stock.price > this.funds
+            },
+            isQuantityFloat() {
+                return Math.floor(this.quantity) !== this.quantity;
+            },
+            canBuy() {
+                return this.checkFunds || this.quantity <= 0 || this.isQuantityFloat
             }
         },
         methods: {
