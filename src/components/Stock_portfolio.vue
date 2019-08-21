@@ -89,5 +89,10 @@
 <style scoped>
     .panel {
         background-color: #dddddd;
+        border-radius: 5px;
+    }
+
+    .panel-title {
+        text-indent: 5px;
     }
 </style>

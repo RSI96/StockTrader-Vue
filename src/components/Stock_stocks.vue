@@ -53,7 +53,7 @@
         },
         computed: {
             funds() {
-              return this.$store.getters.funds;
+                return this.$store.getters.funds;
             },
             maxQuantity() {
                 return Math.floor(this.funds / this.stock.price);
@@ -83,7 +83,7 @@
                 this.quantity = 0;
             },
             selectMax() {
-                this.quantity = Math.floor(this.funds/this.stock.price);
+                this.quantity = Math.floor(this.funds / this.stock.price);
             }
         }
     }
@@ -92,5 +92,10 @@
 <style scoped>
     .panel {
         background-color: #dddddd;
+        border-radius: 5px;
+    }
+
+    .panel-title {
+        text-indent: 5px;
     }
 </style>
