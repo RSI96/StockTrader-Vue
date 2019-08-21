@@ -15,13 +15,14 @@
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
+                            :max="maxQuantity"
                             v-model.number="quantity"
                     >
                     <div class="input-group-append">
                         <button
                                 class="btn btn-success"
                                 @click="selectMax"
-                                :disabled="checkIfMax"
+                                :disabled="isMaxQuantity"
                         >MAX
                         </button>
                     </div>
@@ -53,11 +54,14 @@
             funds() {
               return this.$store.getters.funds;
             },
+            maxQuantity() {
+                return Math.floor(this.funds / this.stock.price);
+            },
+            isMaxQuantity() {
+                return this.quantity >= this.maxQuantity;
+            },
             checkFunds() {
                 return this.quantity * this.stock.price > this.funds
-            },
-            checkIfMax() {
-                return this.quantity * this.stock.price > (this.funds - this.stock.price) && this.quantity * this.stock.price < (this.funds + this.stock.price) ;
             }
         },
         methods: {
