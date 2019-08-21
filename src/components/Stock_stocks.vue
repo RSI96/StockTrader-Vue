@@ -57,7 +57,7 @@
                 return this.quantity * this.stock.price > this.funds
             },
             checkIfMax() {
-                return this.quantity * this.stock.price === this.funds;
+                return this.quantity * this.stock.price > (this.funds - this.stock.price) && this.quantity * this.stock.price < (this.funds + this.stock.price) ;
             }
         },
         methods: {
