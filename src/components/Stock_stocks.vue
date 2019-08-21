@@ -20,8 +20,16 @@
                     <div class="input-group-append">
                         <button
                                 class="btn btn-success"
+                                @click="selectMax"
+                                :disabled="checkIfMax"
+                        >MAX
+                        </button>
+                    </div>
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-success"
                                 @click="buyStock"
-                                :disabled="checkFunds || quantity <= 0 || !Number.isInteger(quantity)"
+                                :disabled="checkFunds || quantity <= 0"
                         >{{ checkFunds ? 'Get more money' : 'BUY'}}
                         </button>
                     </div>
@@ -47,6 +55,9 @@
             },
             checkFunds() {
                 return this.quantity * this.stock.price > this.funds
+            },
+            checkIfMax() {
+                return this.quantity * this.stock.price === this.funds;
             }
         },
         methods: {
@@ -59,11 +70,16 @@
                 };
                 this.$store.dispatch('buyStock', order);
                 this.quantity = 0;
+            },
+            selectMax() {
+                this.quantity = Math.floor(this.funds/this.stock.price);
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .panel {
+        background-color: #dddddd;
+    }
 </style>

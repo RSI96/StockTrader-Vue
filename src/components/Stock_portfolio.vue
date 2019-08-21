@@ -20,8 +20,16 @@
                     <div class="input-group-append">
                         <button
                                 class="btn btn-dark"
+                                @click="selectAll"
+                                :disabled="checkIfAll"
+                        >ALL
+                        </button>
+                    </div>
+                    <div class="input-group-append">
+                        <button
+                                class="btn btn-dark"
                                 @click="sellStock"
-                                :disabled="checkQuantity || quantity <= 0 || Number.isInteger(quantity)"
+                                :disabled="checkQuantity || quantity <= 0"
                         >{{ checkQuantity ? 'not enough' : 'SELL' }}
                         </button>
                     </div>
@@ -46,6 +54,9 @@
         computed: {
             checkQuantity() {
                 return this.quantity > this.stock.quantity;
+            },
+            checkIfAll() {
+                return this.quantity === this.stock.quantity;
             }
         },
         methods: {
@@ -60,7 +71,16 @@
                 }
                 this.placeDellOrder(order);
                 this.quantity = 0;
+            },
+            selectAll() {
+                this.quantity = this.stock.quantity;
             }
         }
     }
 </script>
+
+<style scoped>
+    .panel {
+        background-color: #dddddd;
+    }
+</style>
