@@ -15,7 +15,10 @@
                     <router-link to="/stocks" class="nav-link"><a>Stocks</a></router-link>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li
+                        class="nav-item dropdown"
+                        :class="{ open: isDropdownOpen }"
+                        @click="isDropdownOpen != isDropdownOpen">
                     <a
                             class="nav-link dropdown-toggle"
                             href="#" id="navbarDropdown"
@@ -48,7 +51,11 @@
 
     export default {
         name: "Header",
-
+        data() {
+            return {
+                isDropdownOpen: false
+            }
+        },
         computed: {
             funds() {
                 return this.$store.getters.funds;

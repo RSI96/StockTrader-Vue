@@ -15,13 +15,13 @@
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
-                            v-model="quantity"
+                            v-model.number="quantity"
                     >
                     <div class="input-group-append">
                         <button
                                 class="btn btn-success"
                                 @click="buyStock"
-                                :disabled="checkFunds || quantity <= 0 || Number.isSafeInteger(quantity)"
+                                :disabled="checkFunds || quantity <= 0 || !Number.isInteger(quantity)"
                         >{{ checkFunds ? 'Get more money' : 'BUY'}}
                         </button>
                     </div>
@@ -53,8 +53,9 @@
             buyStock() {
                 const order = {
                     stockID: this.stock.id,
-                    stockPrice: this.stock.price,
-                    quantity: this.quantity
+                    quantity: this.quantity,
+                    stockPrice: this.stock.price
+
                 };
                 this.$store.dispatch('buyStock', order);
                 this.quantity = 0;
