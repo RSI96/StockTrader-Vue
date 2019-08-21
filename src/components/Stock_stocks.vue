@@ -22,8 +22,8 @@
                     <div class="input-group-append">
                         <button
                                 class="btn btn-success"
-                                @click="selectMax"
-                                :disabled="isMaxQuantity"
+                                @click="selectMaxQuantity"
+                                :disabled="selectedMaxQuantity"
                         >MAX
                         </button>
                     </div>
@@ -58,7 +58,7 @@
             maxQuantity() {
                 return Math.floor(this.funds / this.stock.price);
             },
-            isMaxQuantity() {
+            selectedMaxQuantity() {
                 return this.quantity >= this.maxQuantity;
             },
             checkFunds() {
@@ -82,7 +82,7 @@
                 this.$store.dispatch('buyStock', order);
                 this.quantity = 0;
             },
-            selectMax() {
+            selectMaxQuantity() {
                 this.quantity = Math.floor(this.funds / this.stock.price);
             }
         }

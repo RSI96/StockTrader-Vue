@@ -1,10 +1,12 @@
 <template>
   <div>
     <h1>Viev your portfolio</h1>
-    <h6>Save and load in progress</h6>
-    <h6>Click End Day to end a day...</h6>
     <hr>
-    <p>Your funds: {{ funds | currency}}</p>
+    <h6>Save and load disabled</h6>
+    <h6>Click End Day to update prices</h6>
+    <hr>
+    <p>You have: {{ funds | currency}}</p>
+    <h6>Enjoy!</h6>
   </div>
 </template>
 

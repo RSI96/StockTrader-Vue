@@ -21,8 +21,8 @@
                     <div class="input-group-append">
                         <button
                                 class="btn btn-dark"
-                                @click="selectAll"
-                                :disabled="checkIfAll"
+                                @click="setMaxQuantity"
+                                :disabled="selectedMaxQuantity"
                         >ALL
                         </button>
                     </div>
@@ -31,7 +31,7 @@
                                 class="btn btn-dark"
                                 @click="sellStock"
                                 :disabled="canSell"
-                        >{{ checkQuantity ? 'not enough' : 'SELL' }}
+                        >{{ hasEnoughQuantity ? 'not enough' : 'SELL' }}
                         </button>
                     </div>
                 </div>
@@ -53,17 +53,17 @@
             }
         },
         computed: {
-            checkQuantity() {
+            hasEnoughQuantity() {
                 return this.quantity > this.stock.quantity;
             },
-            checkIfAll() {
+            selectedMaxQuantity() {
                 return this.quantity === this.stock.quantity;
             },
             isQuantityFloat() {
                 return Math.floor(this.quantity) !== this.quantity;
             },
             canSell() {
-                return this.checkQuantity || this.quantity <= 0 || this.isQuantityFloat
+                return this.hasEnoughQuantity || this.quantity <= 0 || this.isQuantityFloat
             }
         },
         methods: {
@@ -75,11 +75,11 @@
                     stockID: this.stock.id,
                     stockPrice: this.stock.price,
                     quantity: this.quantity
-                }
+                };
                 this.placeDellOrder(order);
                 this.quantity = 0;
             },
-            selectAll() {
+            setMaxQuantity() {
                 this.quantity = this.stock.quantity;
             }
         }

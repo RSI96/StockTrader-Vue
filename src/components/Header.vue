@@ -16,10 +16,7 @@
                     <router-link to="/stocks" class="nav-link"><a>Stocks</a></router-link>
                 </li>
 
-                <li
-                        class="nav-item dropdown"
-                        :class="{ open: isDropdownOpen }"
-                        @click="isDropdownOpen != isDropdownOpen">
+                <li class="nav-item dropdown">
                     <a
                             class="nav-link dropdown-toggle"
                             href="#" id="navbarDropdown"
