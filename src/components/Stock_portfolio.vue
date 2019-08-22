@@ -47,7 +47,7 @@
 
     export default {
         name: "Stock_stocks",
-        props:{
+        props: {
             stock: Object
         },
         data() {

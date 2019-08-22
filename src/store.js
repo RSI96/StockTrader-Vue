@@ -6,17 +6,11 @@ import portfolio from "./store/portfolio";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules: {
-    stocks,
-    portfolio
-  },
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
-  }
+    modules: {
+        stocks,
+        portfolio
+    },
+    state: {},
+    mutations: {},
+    actions: {}
 })
