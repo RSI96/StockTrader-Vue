@@ -1,4 +1,4 @@
-# vue3-project
+# Stock Trader Game
 
 ## Project setup
 ```

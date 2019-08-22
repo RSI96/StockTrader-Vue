@@ -15,8 +15,9 @@
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
-                            v-model="quantity"
-                            step="1"
+                            :max="this.stock.quantity"
+                            v-model.number="quantity"
+                            @focus="$event.target.select()"
                     >
                     <div class="input-group-append">
                         <button
@@ -46,7 +47,9 @@
 
     export default {
         name: "Stock_stocks",
-        props: ['stock'],
+        props:{
+            stock: Object
+        },
         data() {
             return {
                 quantity: 0

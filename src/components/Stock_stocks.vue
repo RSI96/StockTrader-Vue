@@ -8,8 +8,6 @@
                 </h4>
             </div>
             <div class="panel body">
-
-
                 <div class="input-group mb-3">
                     <input
                             type="number"
@@ -17,7 +15,7 @@
                             placeholder="Quantity"
                             :max="maxQuantity"
                             v-model.number="quantity"
-                            pattern="\d+"
+                            @focus="$event.target.select()"
                     >
                     <div class="input-group-append">
                         <button
@@ -45,7 +43,9 @@
 <script>
     export default {
         name: "Stock_stocks",
-        props: ['stock'],
+        props: {
+            stock: Object
+        },
         data() {
             return {
                 quantity: 0
@@ -96,6 +96,9 @@
     }
 
     .panel-title {
+    }
+
+    .panel-heading {
         text-indent: 5px;
     }
 </style>
